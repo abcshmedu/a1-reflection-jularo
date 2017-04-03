@@ -1,1 +1,8 @@
 /.project
+/demo.iml
+/.idea/
+.idea/.name
+.idea/compiler.xml
+.idea/copyright/
+.idea/misc.xml
+.idea/workspace.xml
