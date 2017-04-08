@@ -1,9 +1,17 @@
 package edu.hm.renderer;
 
 /**
- * Created by Caro Direnberger on 30.03.2017.
+ * An annotation for representing attributes of an object.
+ *
+ * @author Juliane Seidl
+ * @author Caro Dierenberger
  */
 public @interface RenderMe {
 
+    /**
+     * The annotations parameter.
+     *
+     * @return A string with the representation of the annotated attributes of a class.
+     */
     String with() default "";
 }
