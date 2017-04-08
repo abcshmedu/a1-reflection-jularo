@@ -1,4 +1,4 @@
-package edu.hm.renderer;
+package main.edu.hm.renderer;
 
 /**
  * A renderer for arrays.
