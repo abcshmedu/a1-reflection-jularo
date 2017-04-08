@@ -4,7 +4,7 @@ package edu.hm.renderer;
  * An annotation for representing attributes of an object.
  *
  * @author Juliane Seidl
- * @author Caro Dierenberger
+ * @author Caro Direnberger
  */
 public @interface RenderMe {
 
