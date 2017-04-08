@@ -27,7 +27,9 @@ public class Renderer {
      * @return A string that represents the object's annotated attributes and methods.
      */
     public String render() {
-        return renderAttributes();
+        // get the given objects class
+        Class objectClass = object.getClass();
+        return renderAttributes(objectClass);
     }
 
     /**
@@ -35,22 +37,19 @@ public class Renderer {
      *
      * @return A string that represents the object's annotated attributes.
      */
-    private String renderAttributes(){
-        // get the given objects class
-        Class objectClass = object.getClass();
+    private String renderAttributes(Class objectClass){
         // get the given objects class name
         String output = "Instance of " + objectClass.getName() + ":\n";
 
-        // go through all fields of the given object
         try {
+            // get all fields of the object
             Field[] fields = objectClass.getDeclaredFields();
+            // go through all fields of the given object
             for(Field field : fields){
                 // including private fields
                 field.setAccessible(true);
-
                 // check if field has @RenderMe annotation
                 if(field.isAnnotationPresent(RenderMe.class)){
-
                     // get the with Parameter
                     String parameterFromWith = field.getAnnotation(RenderMe.class).with();
                     // if it has a value, continue accordingly
@@ -73,6 +72,31 @@ public class Renderer {
         }
         // when nothing was annotated
         return "";
+    }
+
+    private String renderMethods(Class objectClass){
+        String output = "";
+        try {
+            // get all methods of the object
+            Method[] methods = objectClass.getDeclaredMethods();
+            // go through all methods
+            for(Method method : methods){
+                // including private methods
+                method.setAccessible(true);
+                // check if method has @RenderMe annotation
+                if(method.isAnnotationPresent(RenderMe.class)){
+                    // get the with Parameter
+                    String parameterFromWith = method.getAnnotation(RenderMe.class).with();
+                    // if it has a value, continue accordingly
+
+                }
+
+            }
+
+        } catch(Exception exception){
+            exception.printStackTrace();
+        }
+
     }
 }
 
