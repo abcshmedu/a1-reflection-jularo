@@ -8,16 +8,30 @@ import org.junit.Test;
 import main.edu.hm.SomeClass;
 import main.edu.hm.renderer.Renderer;
 
+/**
+ * 
+ * @author Juliane Seidl
+ * @author Caro Direnberger
+ */
 public class RendererTest {
     private SomeClass toRender;
     private Renderer renderer;
+    
+    private static final int FIVE = 5;
 
+    /**
+     * Init for RendererTest.
+     */
     @Before
     public void setUp() {
-        toRender = new SomeClass(5);
+        toRender = new SomeClass(FIVE);
         renderer = new Renderer(toRender);
     }
 
+  
+    /**
+     * @throws Exception Could throw ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException
+     */
     @Test
     public void testRendering() throws Exception {
         assertEquals(

@@ -13,8 +13,8 @@ import java.lang.reflect.Method;
 public class Renderer {
 
     private Object object;
-    private StringBuilder builder = builder = new StringBuilder();
-    ;
+    private StringBuilder builder = new StringBuilder();
+    
 
     /**
      * The constructor for a Renderer Object.
@@ -29,19 +29,20 @@ public class Renderer {
     }
 
     /**
-     * Gives a string representation of annotated render attributes and methods of the object.
+     * Gives a string representation of annotated render fields and methods of the object.
      *
      * @return A string that represents the object's annotated fields and methods.
-     * @throws ClassNotFoundException
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InstantiationException
-     * @throws InvocationTargetException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
+     * @throws InstantiationException Thrown when an application tries to create an instance of a class using the newInstance method in class Class, but the specified class object cannot be instantiated.
+     * @throws InvocationTargetException InvocationTargetException is a checked exception that wraps an exception thrown by an invoked method or constructor.
+     * @throws IllegalArgumentException Thrown to indicate that a method has been passed an illegal or inappropriate argument.
+     * @throws IllegalAccessException An IllegalAccessException is thrown when an application tries to reflectively create an instance (other than an array), set or get a field, or invoke a method, but the currently executing method does not have access to the definition of the specified class, field, method or constructor.
+     * @throws SecurityException Thrown by the security manager to indicate a security violation.
+     * @throws NoSuchMethodException Thrown when a particular method cannot be found.
+     * @throws ClassNotFoundException Thrown when an application tries to load in a class through its string name but no definition for the class with the specified name could be found.
      */
-    public String render() throws ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {// get the given objects class
-        Class<? extends Object> objectClass = object.getClass();
+    public String render() throws ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
+      // get the given objects class
+        Class< ? extends Object> objectClass = object.getClass();
 
         builder.append("Instance of " + object.getClass().getName() + ":\n");
         renderFields(objectClass.getDeclaredFields());
@@ -53,14 +54,14 @@ public class Renderer {
     /**
      * Gives a string representation of annotated render fields of the object.
      *
-     * @param fields the class to render
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     * @throws InvocationTargetException
-     * @throws InstantiationException
-     * @throws NoSuchMethodException
-     * @throws SecurityException
-     * @throws ClassNotFoundException
+     * @param fields the class to render 
+     * @throws InstantiationException Thrown when an application tries to create an instance of a class using the newInstance method in class Class, but the specified class object cannot be instantiated.
+     * @throws InvocationTargetException InvocationTargetException is a checked exception that wraps an exception thrown by an invoked method or constructor.
+     * @throws IllegalArgumentException Thrown to indicate that a method has been passed an illegal or inappropriate argument.
+     * @throws IllegalAccessException An IllegalAccessException is thrown when an application tries to reflectively create an instance (other than an array), set or get a field, or invoke a method, but the currently executing method does not have access to the definition of the specified class, field, method or constructor.
+     * @throws SecurityException Thrown by the security manager to indicate a security violation.
+     * @throws NoSuchMethodException Thrown when a particular method cannot be found.
+     * @throws ClassNotFoundException Thrown when an application tries to load in a class through its string name but no definition for the class with the specified name could be found.
      */
     private void renderFields(Field[] fields) throws ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
 
@@ -80,6 +81,8 @@ public class Renderer {
     }
 
     /**
+     * Gives a string representation of annotated render methods of the object.
+     * 
      * @param methods the class to render
      */
     private void renderMethods(Method[] methods) {
