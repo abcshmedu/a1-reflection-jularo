@@ -1,5 +1,5 @@
-package edu.hm;
-//package test.edu.hm;
+package edu.hm;     //<- intelliJ
+//package test.edu.hm;  //<- eclipse
 
 
 import static org.junit.Assert.assertEquals;

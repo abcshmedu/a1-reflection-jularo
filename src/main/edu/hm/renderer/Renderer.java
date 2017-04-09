@@ -96,12 +96,13 @@ public class Renderer {
         Arrays.sort(methods, new Comparator<Method>() {
             public int compare(Method o1, Method o2) {
                 return o1.toString().compareToIgnoreCase(o2.toString());
-            }});
+            } 
+          });
         for (Method method : methods) {
             method.setAccessible(true);
             if (method.isAnnotationPresent(RenderMe.class) && method.getParameterTypes().length == 0 && !method.getReturnType().toString().equals("void")) {
                 String parameterFromWith = method.getAnnotation(RenderMe.class).with();
-                if(parameterFromWith.length() > 0){
+                if (parameterFromWith.length() > 0) {
                     Class classToRenderSeparately = Class.forName(parameterFromWith);
                     Method renderMethod = classToRenderSeparately.getMethod("render", method.getReturnType());
                     builder.append(method.getName() + " (Type " + method.getReturnType().getCanonicalName() + "): " + renderMethod.invoke(classToRenderSeparately.newInstance(), method.invoke(object, null)));

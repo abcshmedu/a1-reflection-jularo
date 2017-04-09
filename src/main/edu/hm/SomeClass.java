@@ -1,5 +1,4 @@
 package main.edu.hm;
-//package test.edu.hm;
 
 
 import java.util.Date;
@@ -27,27 +26,43 @@ public class SomeClass {
 
     private String doNotRenderMeString = "Do not render me String";
 
+    /**
+     * @return A String: "Hello"
+     */
     @RenderMe
-    private String renderMethodString(){
+    private String renderMethodString() {
         return "Hello";
     }
 
-    @RenderMe(with= "main.edu.hm.renderer.ArrayRenderer")
-    private int[] renderMethodArray(){
+    /**
+     * @return new int-Array
+     */
+    @RenderMe(with = "main.edu.hm.renderer.ArrayRenderer")
+    private int[] renderMethodArray() {
         return new int[] {1, 2, THREE, };
     }
 
+    /**
+     * Prints a string.
+     */
     @RenderMe
-    private void doNotRenderMeWithVoid(){
+    private void doNotRenderMeWithVoid() {
         System.out.println("Do not render me");
     }
 
+    /**
+     * @param string given string
+     * @return given string
+     */
     @RenderMe
-    private String doNotRenderMeWithParameter(String string){
+    private String doNotRenderMeWithParameter(String string) {
         return string;
     }
 
-    private int doNotRenderMe(){
+    /**
+     * @return 1
+     */
+    private int doNotRenderMe() {
         return 1;
     }
 
