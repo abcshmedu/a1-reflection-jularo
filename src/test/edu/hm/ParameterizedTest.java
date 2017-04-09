@@ -1,4 +1,5 @@
-package test.edu.hm;
+package edu.hm;
+//package test.edu.hm;
 
 
 import static org.junit.Assert.assertEquals;
@@ -53,27 +54,37 @@ public class ParameterizedTest {
                 {RANDOM_NUMBER, "Instance of main.edu.hm.SomeClass:\n"
                         + "foo (Type int): " + RANDOM_NUMBER + "\n"
                         + "array (Type int[]): [1, 2, 3, ]\n"
-                        + "date (Type java.util.Date): Fri Jan 02 11:17:36 CET 1970\n"},
+                        + "date (Type java.util.Date): Fri Jan 02 11:17:36 CET 1970\n"
+                        + "renderMethodArray (Type int[]): [1, 2, 3, ]\n"
+                        + "renderMethodString (Type java.lang.String): Hello\n"},
 
                 {Integer.MAX_VALUE, "Instance of main.edu.hm.SomeClass:\n"
                         + "foo (Type int): " + Integer.MAX_VALUE + "\n"
                         + "array (Type int[]): [1, 2, 3, ]\n"
-                        + "date (Type java.util.Date): Fri Jan 02 11:17:36 CET 1970\n"},
+                        + "date (Type java.util.Date): Fri Jan 02 11:17:36 CET 1970\n"
+                        + "renderMethodArray (Type int[]): [1, 2, 3, ]\n"
+                        + "renderMethodString (Type java.lang.String): Hello\n"},
 
                 {Integer.MIN_VALUE, "Instance of main.edu.hm.SomeClass:\n"
                         + "foo (Type int): " + Integer.MIN_VALUE + "\n"
                         + "array (Type int[]): [1, 2, 3, ]\n"
-                        + "date (Type java.util.Date): Fri Jan 02 11:17:36 CET 1970\n"},
+                        + "date (Type java.util.Date): Fri Jan 02 11:17:36 CET 1970\n"
+                        + "renderMethodArray (Type int[]): [1, 2, 3, ]\n"
+                        + "renderMethodString (Type java.lang.String): Hello\n"},
 
                 {C_BDAY, "Instance of main.edu.hm.SomeClass:\n"
                         + "foo (Type int): " + C_BDAY + "\n"
                         + "array (Type int[]): [1, 2, 3, ]\n"
-                        + "date (Type java.util.Date): Fri Jan 02 11:17:36 CET 1970\n"},
+                        + "date (Type java.util.Date): Fri Jan 02 11:17:36 CET 1970\n"
+                        + "renderMethodArray (Type int[]): [1, 2, 3, ]\n"
+                        + "renderMethodString (Type java.lang.String): Hello\n"},
 
                 {J_BDAY, "Instance of main.edu.hm.SomeClass:\n"
                         + "foo (Type int): " + J_BDAY + "\n"
                         + "array (Type int[]): [1, 2, 3, ]\n"
-                        + "date (Type java.util.Date): Fri Jan 02 11:17:36 CET 1970\n"}
+                        + "date (Type java.util.Date): Fri Jan 02 11:17:36 CET 1970\n"
+                        + "renderMethodArray (Type int[]): [1, 2, 3, ]\n"
+                        + "renderMethodString (Type java.lang.String): Hello\n"},
         });
     }
 

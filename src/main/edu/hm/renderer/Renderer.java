@@ -3,6 +3,8 @@ package main.edu.hm.renderer;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * The class for rendering (string representation) attributes and methods of an object.
@@ -64,15 +66,14 @@ public class Renderer {
      * @throws ClassNotFoundException Thrown when an application tries to load in a class through its string name but no definition for the class with the specified name could be found.
      */
     private void renderFields(Field[] fields) throws ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
-
         for (final Field field : fields) {
             field.setAccessible(true);
             if (field.isAnnotationPresent(RenderMe.class)) {
                 String parameterFromWith = field.getAnnotation(RenderMe.class).with();
                 if (parameterFromWith.length() > 0) {
-                    Class classToRenderSeparately = Class.forName(parameterFromWith);
-                    Method renderMethod = classToRenderSeparately.getMethod("render", field.getType());
-                    builder.append(field.getName() + " (Type " + field.getType().getCanonicalName() + "): " + renderMethod.invoke(classToRenderSeparately.newInstance(), field.get(object)));
+                        Class classToRenderSeparately = Class.forName(parameterFromWith);
+                        Method renderMethod = classToRenderSeparately.getMethod("render", field.getType());
+                        builder.append(field.getName() + " (Type " + field.getType().getCanonicalName() + "): " + renderMethod.invoke(classToRenderSeparately.newInstance(), field.get(object)));
                 } else {
                     builder.append(field.getName() + " (Type " + field.getType().getCanonicalName() + "): " + field.get(object).toString() + "\n");
                 }
@@ -84,14 +85,29 @@ public class Renderer {
      * Gives a string representation of annotated render methods of the object.
      * 
      * @param methods the class to render
+     * @throws InvocationTargetException InvocationTargetException is a checked exception that wraps an exception thrown by an invoked method or constructor.
+     * @throws IllegalAccessException An IllegalAccessException is thrown when an application tries to reflectively create an instance (other than an array), set or get a field, or invoke a method, but the currently executing method does not have access to the definition of the specified class, field, method or constructor.
+     * @throws ClassNotFoundException Thrown when an application tries to load in a class through its string name but no definition for the class with the specified name could be found.
+     * @throws NoSuchMethodException Thrown when a particular method cannot be found.
+     * @throws InstantiationException Thrown when an application tries to create an instance of a class using the newInstance method in class Class, but the specified class object cannot be instantiated.
      */
-    private void renderMethods(Method[] methods) {
+    private void renderMethods(Method[] methods) throws InvocationTargetException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, InstantiationException {
+        // sort the Methods array alphabetical for stable test results
+        Arrays.sort(methods, new Comparator<Method>() {
+            public int compare(Method o1, Method o2) {
+                return o1.toString().compareToIgnoreCase(o2.toString());
+            }});
         for (Method method : methods) {
             method.setAccessible(true);
-            if (method.isAnnotationPresent(RenderMe.class)) {
-                if (!method.getReturnType().toString().equals("void")) {
-                    builder.append(method.getName());
-                    builder.append("returnType: " + method.getReturnType());
+            if (method.isAnnotationPresent(RenderMe.class) && method.getParameterTypes().length == 0 && !method.getReturnType().toString().equals("void")) {
+                String parameterFromWith = method.getAnnotation(RenderMe.class).with();
+                if(parameterFromWith.length() > 0){
+                    Class classToRenderSeparately = Class.forName(parameterFromWith);
+                    Method renderMethod = classToRenderSeparately.getMethod("render", method.getReturnType());
+                    builder.append(method.getName() + " (Type " + method.getReturnType().getCanonicalName() + "): " + renderMethod.invoke(classToRenderSeparately.newInstance(), method.invoke(object, null)));
+                }
+                else {
+                    builder.append(method.getName() + " (Type " + method.getReturnType().getCanonicalName() + "): " + method.invoke(object, null).toString() + "\n");
                 }
             }
         }

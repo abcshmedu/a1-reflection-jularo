@@ -1,4 +1,4 @@
-package test.edu.hm;
+package edu.hm;
 
 import static org.junit.Assert.assertEquals;
 
@@ -38,7 +38,9 @@ public class RendererTest {
                 "Instance of main.edu.hm.SomeClass:\n"
                         + "foo (Type int): 5\n"
                         + "array (Type int[]): [1, 2, 3, ]\n"
-                        + "date (Type java.util.Date): Fri Jan 02 11:17:36 CET 1970\n",
+                        + "date (Type java.util.Date): Fri Jan 02 11:17:36 CET 1970\n"
+                        + "renderMethodArray (Type int[]): [1, 2, 3, ]\n"
+                        + "renderMethodString (Type java.lang.String): Hello\n",
                 renderer.render());
     }
 }
